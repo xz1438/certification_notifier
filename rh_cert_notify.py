@@ -6,8 +6,32 @@
 import requests
 import pandas as pd
 import numpy as np
+import smtplib
 import re
 
+from email.message import EmailMessage
+
+"""
+Email function for one recipient
+recipient is one email
+Password for redhat account will be standard input for the time being
+Execute with email_recipient("example@company.com")
+"""
+def email_recipient(recipient):
+    sender = "rhemailnotifier@gmail.com"
+    msg = EmailMessage()
+
+    msg['From'] = sender
+    msg['To'] = recipient
+    msg['Subject'] = "Expiring certification"
+
+    msg.set_content("Hello")
+
+    s = smtplib.SMTP("smtp.gmail.com")
+    s.starttls()
+    s.login("rhemailnotifier@gmail.com", input("Sender password: "))
+    s.sendmail(sender, recipient, msg.as_string())
+    s.quit()
 
 def get_info(lists_len):
     data_table = []
@@ -23,7 +47,7 @@ def get_info(lists_len):
         data_table.append([exam_name,tech_used,exam_date,exam_ex_date])
         x += 3
     return data_table 
-    
+
 # specify the url
 src_url = 'https://www.redhat.com/rhtapps/services/verify?certId=140-177-544'
 

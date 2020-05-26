@@ -1,12 +1,4 @@
-argcomplete==1.9.3
-asn1crypto==0.24.0
-beautifulsoup4==4.9.1
-cffi==1.11.5
-chardet==3.0.4
-configobj==5.0.6
-cryptography==2.3
-dbus-python==1.2.4
-decorator==4.2.1
+\decorator==4.2.1
 ethtool==0.14
 file-magic==0.3.0
 gpg==1.10.0

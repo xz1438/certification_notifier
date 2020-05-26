@@ -23,10 +23,6 @@ def get_info(lists_len):
         data_table.append([exam_name,tech_used,exam_date,exam_ex_date])
         x += 3
     return data_table 
-
-def email_record():
-    
-
     
 # specify the url
 src_url = 'https://www.redhat.com/rhtapps/services/verify?certId=140-177-544'

@@ -3,6 +3,8 @@ This repo scrub the access.redhat.com and returns all current certifications and
 
 Building the environment on RHEL8 :
 - dnf install python3-pip
+- subscription-manager repos --enable='codeready-builder-for-rhel-8-x86_64-rpms'
+- dnf -y install gpgme-devel
 - python3 -m pip install pandas
 - python3 -m pip install beautifulsoup4
 - python3 -m pip install lxml
@@ -17,4 +19,4 @@ Building Container:
 - podman login registry.redhat.io < use Red Hat account credentials >
 - dnf -y install buildah
 - podman pull rhel8/python-38
-- 
+

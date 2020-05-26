@@ -1,7 +1,7 @@
 # certification_notifier
 This repo scrub the access.redhat.com and returns all current certifications and sends you an email 6 months before it expires
 
-building the environment on RHEL8 :
+Building the environment on RHEL8 :
 - dnf install python3-pip
 - python3 -m pip install pandas
 - python3 -m pip install beautifulsoup4
@@ -12,3 +12,9 @@ building the environment on RHEL8 :
 - python3 -m pip install -r requirements.txt
 - python3 rh_cert_notify.py
 
+Building Container:
+- dnf -y install podman
+- podman login registry.redhat.io < use Red Hat account credentials >
+- dnf -y install buildah
+- podman pull rhel8/python-38
+- 

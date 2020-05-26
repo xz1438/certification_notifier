@@ -7,11 +7,11 @@ import requests
 import pandas as pd
 import numpy as np
 import re
-
+import smtplib
+import ssl
 
 def get_info(lists_len):
     data_table = []
-    #data_table.append([])
     x = 0
     while x < lists_len:
         list_data = dfs[1].iloc[x][0]
@@ -23,6 +23,10 @@ def get_info(lists_len):
         data_table.append([exam_name,tech_used,exam_date,exam_ex_date])
         x += 3
     return data_table 
+
+def email_record():
+    
+
     
 # specify the url
 src_url = 'https://www.redhat.com/rhtapps/services/verify?certId=140-177-544'

@@ -5,7 +5,7 @@ RUN dnf install -y python3-pip
 RUN dnf -y install gpgme-devel
 #RUN dnf -y install insights-client
 RUN cd /usr/local/bin/
-RUN git clone https://github.com/amalivert/certification_notifier.git && cd certification_notifier && git checkout dev && python3 -m pip -r requirements.txt && python3 -m pip install -r requirements.txt
+RUN git clone https://github.com/amalivert/certification_notifier.git && cd certification_notifier && git checkout dev && python3 -m pip uninstall -r requirements.txt && python3 -m pip install -r requirements.txt
 CMD [ "python3", "./rh_cert_notify.py"]
 
 

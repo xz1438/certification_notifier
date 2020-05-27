@@ -1,4 +1,4 @@
-\decorator==4.2.1
+decorator==4.2.1
 ethtool==0.14
 file-magic==0.3.0
 gpg==1.10.0

@@ -12,7 +12,6 @@ file-magic==0.3.0
 gpg==1.10.0
 idna==2.5
 iniparse==0.4
-insights-client==3.0.13
 isc==2.0
 libvirt-python==4.5.0
 lxml==4.5.1

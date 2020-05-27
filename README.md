@@ -17,6 +17,14 @@ Building the environment on RHEL8 :
 Building Container:
 - dnf -y install podman
 - podman login registry.redhat.io < use Red Hat account credentials >
-- dnf -y install buildah
 - podman pull rhel8/python-38
+- git clone https://github.com/amalivert/certification_notifier.git
+- git checkout dev
+- mkdir /root/build
+- cp -Rf /root/certification_notifier/ /root/build/
+- cd /root/build/
+- podman build certification_notifier
+- podman images
+- podman tag <IMAGE ID> cert_notifier
+- podman run -i -t localhost/cert_notifier /bin/bash
 

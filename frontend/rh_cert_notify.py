@@ -8,6 +8,7 @@ import pandas as pd
 import numpy as np
 import smtplib
 import re
+import ssl
 
 from email.message import EmailMessage
 
@@ -35,7 +36,6 @@ def email_recipient(recipient):
 
 def get_info(lists_len):
     data_table = []
-    #data_table.append([])
     x = 0
     while x < lists_len:
         list_data = dfs[1].iloc[x][0]

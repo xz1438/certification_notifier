@@ -5,7 +5,7 @@
 
 ```
 docker login registry.redhat.io <username>
-docker run -p 3307:3306 --name mymaria1 -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_DATABASE=items -e MYSQL_ROOT_PASSWORD=mypass -d registry.access.redhat.com/rhscl/mariadb-102-rhel7
+docker run -p 127.0.0.1:3307:3306 --name mymaria -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_DATABASE=certs -e MYSQL_ROOT_PASSWORD=mypass -d registry.access.redhat.com/rhscl/mariadb-102-rhel7
 ```
 
 ### Running database inside the container
@@ -16,5 +16,5 @@ mysql -uroot
 
 ### Accessing database from outside the container with MySQL
 ```
-mysql -h 0.0.0.0 -P 3307 --protocol=TCP -u root -p
+mysql -h 127.0.0.1 -P 3307 --protocol=TCP -u root -p
 ```

@@ -53,7 +53,7 @@ try:
    conn = mariadb.connect(
       user="root",
       password="mypass",
-      host="0.0.0.0",
+      host="127.0.0.1",
       port=3308,
       database='certs')
    print ("DB connection success")

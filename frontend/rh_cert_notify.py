@@ -44,7 +44,8 @@ def get_owner_info(owner):
     search_result = ldap_server.search("dc=redhat,dc=com", ldap.SCOPE_SUBTREE, "cn=%s" % owner)
     ldap_server.set_option(ldap.OPT_REFERRALS, 0)
     result_type, result_data = ldap_server.result(search_result, 0)
-    
+    email = [ sub['mail'] for sub in result_data ]
+    print(str(email))
 
 def send_email(recipient):
     sender = "rhemailnotifier@gmail.com"

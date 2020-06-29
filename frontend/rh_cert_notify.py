@@ -42,6 +42,11 @@ list_len = len(dfs[1])
 result = get_info(list_len)
 print(result)
 
+# Dummy variables for email/manager
+people_manager = "John Doe"
+email_add = "sample@email.com"
+
+# Alias for cert names to be used as table names
 cert_alias = {
     'Red Hat Certified Specialist in Ansible Best Practices':"ansible_best_prac", 
     'Red Hat Certified Specialist in Ansible Automation':"ansible_auto",
@@ -50,37 +55,44 @@ cert_alias = {
     }
 
 try:
-   conn = mariadb.connect(
+    conn = mariadb.connect(
       user="root",
       password="mypass",
       host="127.0.0.1",
-      port=3308,
+      port=3307,
       database='certs')
-   print ("DB connection success")
+    print ("DB connection success")
 
-   cursor = conn.cursor()
+    cursor = conn.cursor()
 
-   # Creating tables
-   cursor.execute("create table RHCE (name varchar(255), email varchar(255), cert_id varchar(255), tech varchar(255), date_received date, date_expire date, PRIMARY KEY(name))")
-   cursor.execute("create table RHCSA (name varchar(255), email varchar(255), cert_id varchar(255), tech varchar(255), date_received date, date_expire date, PRIMARY KEY(name))")
-   cursor.execute("create table ansible_auto (name varchar(255), email varchar(255), cert_id varchar(255), tech varchar(255), date_received date, date_expire date, PRIMARY KEY(name))")
-   cursor.execute("create table ansible_best_prac (name varchar(255), email varchar(255), cert_id varchar(255), tech varchar(255), date_received date, date_expire date, PRIMARY KEY(name))")
+    # Creating tables
+    cursor.execute("create table personal_info (name varchar(255), cert_id varchar(255), people_manager varchar(255), email varchar(255), PRIMARY KEY(cert_id))")
 
-   # Insert data into table
-   for curr_cert in result:
-       table_name = cert_alias.get(curr_cert['cert'])
-       sql = "insert into {exam} (name, cert_id, tech, date_received, date_expire) values (%s,%s,%s,%s,%s)".format(exam=table_name)
-       data = (owner_name, cert_id, curr_cert['tech'], curr_cert['date_received'], curr_cert['date_expire'])
-       cursor.execute(sql,data)
-       conn.commit()
-       print ("Insert success into " + table_name)
+    for cert in cert_alias:
+        statement = "create table {cert_name} (name varchar(255), email varchar(255), cert_id varchar(255), tech varchar(255), date_received date, date_expire date, PRIMARY KEY(cert_id))".format(cert_name=cert_alias[cert])
+        cursor.execute(statement)
+
+    # Insert data into table
+    personal_sql = "insert into personal_info (name, cert_id, people_manager, email) values (%s,%s,%s,%s)"
+    personal_data = (owner_name, cert_id, people_manager, email_add)
+    cursor.execute(personal_sql, personal_data)
+    conn.commit()
+    print ("Insert success into personal_info")
+
+    for curr_cert in result:
+        table_name = cert_alias.get(curr_cert['cert'])
+        sql = "insert into {exam} (name, email, cert_id, tech, date_received, date_expire) values (%s,%s,%s,%s,%s,%s)".format(exam=table_name)
+        data = (owner_name, email_add, cert_id, curr_cert['tech'], curr_cert['date_received'], curr_cert['date_expire'])
+        cursor.execute(sql,data)
+        conn.commit()
+        print ("Insert success into " + table_name)
 
 
 except mariadb.Error as e:
-   print(f"Error connecting to MariaDB Platform: {e}")
+    print(f"Error connecting to MariaDB Platform: {e}")
 
 finally:
-   if (conn.is_connected()):
-      cursor.close()
-      conn.close()
-      print("DB connection closed")
+    if (conn.is_connected()):
+        cursor.close()
+        conn.close()
+        print("DB connection closed")

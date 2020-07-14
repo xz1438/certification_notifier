@@ -54,12 +54,14 @@ cert_alias = {
     'Red Hat Certified System Administrator':"RHCSA"
     }
 
+# Need to manually enter in IP address of the MariaDB container
+host_ip = input("Enter MariaDB IP Address: ")
+
 try:
     conn = mariadb.connect(
       user="root",
       password="mypass",
-      host="127.0.0.1",
-      port=3307,
+      host=host_ip,
       database='certs')
     print ("DB connection success")
 

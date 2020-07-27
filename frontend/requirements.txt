@@ -4,3 +4,4 @@ numpy==1.18.4
 pandas==1.0.3
 requests==2.20.0
 ldapsearch
+mysql-connector-python==8.0.20
